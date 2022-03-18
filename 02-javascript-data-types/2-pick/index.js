@@ -5,5 +5,10 @@
  * @returns {object} - returns the new object
  */
 export const pick = (obj, ...fields) => {
-
+  const pickedObj = Object.fromEntries(
+    Object.entries(obj).filter((el) => {
+      return fields.includes(el[0]);
+    })
+  );
+  return pickedObj;
 };
