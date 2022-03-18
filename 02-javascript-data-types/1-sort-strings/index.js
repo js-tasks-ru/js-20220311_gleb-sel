@@ -4,12 +4,13 @@
  * @param {string} [param="asc"] param - the sorting type "asc" or "desc"
  * @returns {string[]}
  */
-export function sortStrings(arr, param = 'asc') {
-  const copy = [...arr];
-  if (param === 'asc') {
-    return copy.sort((a, b) => a.localeCompare(b, ['ru', 'en-US', 'en-GB'], { sensitivity: "case", caseFirst: 'upper'}));
-  } else if (param === 'desc') {
-    return copy.sort((a, b) => b.localeCompare(a, ['ru', 'en-US', 'en-GB'], { sensitivity: "case", caseFirst: 'lower'}));
-  }
+export function sortStrings(arr = [], param = 'asc') {
+  const directions = {
+    asc: 1,
+    desc: -1
+  };
+
+  const direction = directions[param];
+  return [...arr].sort((a, b) => direction * a.localeCompare(b, ['ru', 'en-US', 'en-GB'], { sensitivity: "case", caseFirst: 'upper'}));
 }
 
