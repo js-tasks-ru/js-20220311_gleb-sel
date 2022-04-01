@@ -30,9 +30,9 @@ const product = {
   }
 };
 
-const getter = createGetter('category.title');
+// const getter = createGetter('category.title');
 
-console.log(getter(product));
+// console.log(getter(product));
 
 
 
