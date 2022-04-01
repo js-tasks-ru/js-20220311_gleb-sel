@@ -93,8 +93,4 @@ export default class ColumnChart {
   }
 }
   
-// const columnChart = new ColumnChart();
-// const element = document.getElementById("root");
-  
-// element.append(columnChart.element);
 // npm run test -- 04-oop-basic-intro-to-dom/1-column-chart/index.spec.js

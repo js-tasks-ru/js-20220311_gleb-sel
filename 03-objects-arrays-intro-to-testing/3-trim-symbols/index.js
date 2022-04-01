@@ -21,15 +21,8 @@ export function trimSymbols(string, size) {
     }
     prev = item;
   }
-  const arrCorrectSize = [...arrRepeatValue].map((item) => {
-    console.log(item, item.length, size);
-    if (item.length > size) {
-      item.splice(size);
-      return item;
-    } else {
-      return item;
-    }
-  }); 
+
+  const arrCorrectSize = arrRepeatValue.map((item) => item.slice(0, size));
   return arrCorrectSize.flat().join('');
 }
 
