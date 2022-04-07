@@ -87,6 +87,15 @@ export default class SortableTable {
     }).join('');
   }
 
+  // sort () {
+  //   if (this.isSortLocally) {
+  //     this.sortOnClient();
+  //   } else {
+  //     this.sortOnServer();
+  //   }
+  // }
+  // not use now
+
   sort(fieldValue) {
     const sortedArr = [...this.data];
     const allHeaders = this.subElements.header.querySelectorAll(`[data-id]`);
