@@ -219,7 +219,7 @@ export default class ProductForm {
     const { imageListContainer } = this.subElements;
     const ul = imageListContainer.firstElementChild;
     const imagesHTML = this.dataForm.images.map((image) => this.getImage(image.url, image.source));
-    console.log(imagesHTML);
+    console.log(imagesHTML.join(''));
     return ul.append(imagesHTML);
   }
 
