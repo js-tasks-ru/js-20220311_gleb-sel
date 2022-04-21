@@ -80,22 +80,21 @@ export default class ProductForm {
     }
   }
 
-  constructor (productId) {
+  constructor (productId = '') {
     this.productId = productId;
   }
 
   async render () {
 
     const categoriesPromise = this.loadCategoriesList(); 
-
     const productsPromise = this.productId ? 
-      this.loadProducts(this.productId) : Promise.resolve(this.defaultForm);
-    
+      this.loadProducts(this.productId) : Promise.resolve([this.defaultForm]);
     const promiseProductsCategories = await Promise.all([categoriesPromise, productsPromise]);
 
     const [categories, productsResponse] = promiseProductsCategories;
-    const [products] = productsResponse;
 
+    const [products] = productsResponse;
+    
     this.dataForm = products;
     this.dataCategories = categories;
 
@@ -178,6 +177,7 @@ export default class ProductForm {
     const imageCollection = imageListContainer.querySelectorAll('.sortable-table__cell-img');
 
     data.images = [];
+    
     data.id = this.productId;
 
     for (const image of imageCollection) {
@@ -292,6 +292,11 @@ export default class ProductForm {
   }
 
   getImageContainer() {
+
+    if (!this.productId) {
+      return;
+    } 
+
     const { imageListContainer } = this.subElements;
     const ul = imageListContainer.firstElementChild;
     const imagesHTML = this.dataForm.images.map((image) => this.getImage(image.url, image.source));
