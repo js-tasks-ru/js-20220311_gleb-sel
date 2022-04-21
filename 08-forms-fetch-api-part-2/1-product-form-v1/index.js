@@ -56,7 +56,6 @@ export default class ProductForm {
           referrer: ''
         });
 
-        console.log(imageListContainer.firstElementChild);
 
         imageListContainer.firstElementChild.append(this.getImage(responce.data.link, file.name));
 
@@ -144,7 +143,6 @@ export default class ProductForm {
 
   async save () {
     const data = this.getData();
-    console.log(data);
 
     try {
       const responce = await fetch(`${BACKEND_URL}/api/rest/products`, {
