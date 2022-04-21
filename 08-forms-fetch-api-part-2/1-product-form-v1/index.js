@@ -18,8 +18,8 @@ export default class ProductForm {
     discount: 0
   };
 
-  onSubmit = (e) => {
-    e.preventDefault();
+  onSubmit = (event) => {
+    event.preventDefault();
 
     this.save();
 
@@ -105,7 +105,7 @@ export default class ProductForm {
     this.element = element.firstElementChild;
 
     this.subElements = this.getSubElements();
-    console.log(this.subElements);
+
     this.setData();
     this.initEventListeners();
 
@@ -156,7 +156,7 @@ export default class ProductForm {
     } catch (e) {
       console.error(e);
     }
-  
+    
   }
 
   getData() {
@@ -177,10 +177,11 @@ export default class ProductForm {
 
     const imageCollection = imageListContainer.querySelectorAll('.sortable-table__cell-img');
 
-    data.image = [];
+    data.images = [];
+    data.id = this.productId;
 
     for (const image of imageCollection) {
-      data.image.push({
+      data.images.push({
         url: image.src,
         source: image.alt,
       });
@@ -203,7 +204,6 @@ export default class ProductForm {
     const elements = this.element.querySelectorAll('[data-element]');
 
     for (const item of elements) {
-      console.log(item);
       this.subElements[item.dataset.element] = item;
     }
 
@@ -212,12 +212,29 @@ export default class ProductForm {
   }
 
   initEventListeners() {
-    const {formButtons, uploadImage, imageListContainer} = this.subElements;
+    const {productForm, uploadImage, imageListContainer} = this.subElements;
 
     imageListContainer.addEventListener('click', this.onDelete);
     uploadImage.addEventListener('click', this.onUploadImage);
-    formButtons.addEventListener('click', this.onSubmit);
+    productForm.addEventListener('submit', this.onSubmit);
   }
+
+  removeEventListeners() {
+    document.removeEventListener('click', this.onDelete);
+    document.removeEventListener('click', this.onUploadImage);
+    document.removeEventListener('submit', this.onSubmit); 
+  }
+
+  remove() {
+    this.element.remove();
+  }
+
+  destroy() {
+    this.remove();
+    this.element = null;
+    this.subElements = null;
+  }
+
 
   getTemplate() {
     return ` <div class="product-form">
@@ -227,7 +244,7 @@ export default class ProductForm {
 
   getProductForm() {
     return `<form data-element="productForm" class="form-grid">
-      ${this.getFormGroup(this.dataForm)}
+      ${this.getFormGroup()}
       ${this.getFormButtons(this.productId)}
     </form>`;
   }
