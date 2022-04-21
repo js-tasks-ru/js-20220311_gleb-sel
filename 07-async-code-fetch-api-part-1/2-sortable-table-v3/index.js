@@ -122,12 +122,9 @@ export default class SortableTable {
   }
 
   getStyleLoadingLine = (data = []) => {
-    let styleLoading = this.subElements.loading;
-    if (data) {
-      styleLoading.display = 'none';
-    } else {
-      styleLoading.display = 'block';
-    }
+
+    const styleLoading = this.subElements.loading;
+    styleLoading.display = data ? 'none' : 'block';
   } 
 
   update(data) {
