@@ -124,7 +124,6 @@ export default class ProductForm {
     return await fetchJson(url);
   }
 
-// test
   setData() {
     const formData = this.element.querySelector('[data-element="productForm"]');
  
