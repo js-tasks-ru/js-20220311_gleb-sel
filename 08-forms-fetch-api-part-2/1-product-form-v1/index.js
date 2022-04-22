@@ -56,8 +56,8 @@ export default class ProductForm {
           referrer: ''
         });
 
-
-        imageListContainer.firstElementChild.append(this.getImage(responce.data.link, file.name));
+        const newImage = this.getImage(responce.data.link, file.name);
+        imageListContainer.firstElementChild.append(newImage);
 
         uploadImage.disabled = false;
         uploadImage.classList.remove('is-loading');
@@ -76,6 +76,7 @@ export default class ProductForm {
 
   onDelete = (event) => {
     if ('deleteHandle' in event.target.dataset) {
+      console.log('test');
       event.target.closest('li').remove();
     }
   }
@@ -192,14 +193,6 @@ export default class ProductForm {
 
 
   getSubElements() {
-    // const elements = this.element.querySelectorAll("[data-element]");
-    // this.subElements = [...elements].reduce((subElements, subElement) => {
-    //   subElement[subElement.dataset.element] = subElement;
-
-    //   return subElements;
-    // }, this.subElements);
-    // return this.subElements;
-    // почему не работала? спросить
 
     const elements = this.element.querySelectorAll('[data-element]');
 
@@ -220,9 +213,9 @@ export default class ProductForm {
   }
 
   removeEventListeners() {
-    document.removeEventListener('click', this.onDelete);
-    document.removeEventListener('click', this.onUploadImage);
-    document.removeEventListener('submit', this.onSubmit); 
+    this.removeEventListener('click', this.onDelete);
+    this.removeEventListener('click', this.onUploadImage);
+    this.removeEventListener('submit', this.onSubmit); 
   }
 
   remove() {
