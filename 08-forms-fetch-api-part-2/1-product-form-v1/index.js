@@ -300,7 +300,6 @@ export default class ProductForm {
   getImage(url, source) {
 
     const wrapper = document.createElement('div');
-
     wrapper.innerHTML = `
     <li class="products-edit__imagelist-item sortable-list__item" style="">
     <input type="hidden" name="url" value="${escapeHtml(url)}">
