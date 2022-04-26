@@ -82,7 +82,7 @@ export default class SortableTable {
 
 
   async render() {
-
+    
     const { id, order } = this.sorted;
 
     const element = document.createElement('div');
@@ -104,12 +104,12 @@ export default class SortableTable {
     this.url.searchParams.set('_end', end);
     
     
-    this.element.classList.add('sortable-table__loading');
+    this.element.classList.add('sortable-table_loading');
     this.getStyleLoadingLine();
 
     const data = await fetchJson(this.url);
 
-    this.element.classList.remove('sortable-table__loading');
+    this.element.classList.remove('sortable-table_loading');
     this.getStyleLoadingLine(data);
     return data;
 
@@ -121,11 +121,6 @@ export default class SortableTable {
 
   }
 
-  getStyleLoadingLine = (data = []) => {
-
-    const styleLoading = this.subElements.loading;
-    styleLoading.display = data ? 'none' : 'block';
-  } 
 
   update(data) {
     const rows = document.createElement('div');

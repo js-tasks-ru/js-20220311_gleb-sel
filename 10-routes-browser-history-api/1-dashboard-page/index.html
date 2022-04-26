@@ -50,12 +50,16 @@
     </ul>
   </aside>
   <section class="content" id="content">
-
+    
   </section>
 </main>
 
 <script type="module">
   import Page from './index.js';
+
+  const toogleSidebar = document.querySelector('.sidebar__toggler');
+
+  toogleSidebar.addEventListener('click', () => document.body.classList.toggle('is-collapsed-sidebar'));
 
   const contentNode = document.querySelector('#content');
 
@@ -66,6 +70,7 @@
     contentNode.innerHTML = '';
     contentNode.append(element);
   }
+
 
   initialize();
 </script>
